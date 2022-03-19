@@ -1,116 +1,92 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Button, Container, Row, Col, Card, Carousel } from "react-bootstrap";
-import img1 from '../assets/img1.jpg'
-import img2 from '../assets/img2.jpg'
-import img3 from '../assets/img3.jpg'
+import { useEffect, useState, useRef } from "react";
+import {
+  Button,
+  Container,
+  Row,
+  Col,
+  Card,
+  Pagination,
+  ListGroupItem,
+  Spinner,
+  Badge,
+} from "react-bootstrap";
 
 const Home = () => {
+  const [movieData, setMovieData] = useState([]);
+  const [results, setResults] = useState(0);
+
+  useEffect(() => {
+    const loadMovies = async () => {
+      const url = "http://www.omdbapi.com/?apikey=6ff3567a&s=avengers";
+      const response = await fetch(`${url}`);
+      const data = await response.json();
+      // console.log(data)
+      const results = data.totalResults;
+      setResults(results);
+      setMovieData(data.Search);
+    };
+    loadMovies();
+  });
+
   return (
-    <Container fluid>
-        <Carousel fade>
-        <Carousel.Item>
-          <img
-            className="d-block w-100"
-            src={img3}
-            alt="First slide"
-          />
-          <Carousel.Caption>
-            <h3>First slide label</h3>
-            <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-          </Carousel.Caption>
-        </Carousel.Item>
-        <Carousel.Item>
-          <img
-            className="d-block w-100"
-            src={img2}
-            alt="Second slide"
-          />
+    <>
+      <Container fluid>
+        <h6><Badge pill bg="secondary" text="dark" style={{ paddingTop: "2em" }}>Results: {results}</Badge></h6>
+        <Row style={{ margin: "3rem 0" }} xs={1} md={2} lg={4}>
+          {movieData.slice(0, 8).map((movie) => {
+            return (
+              <Col>
+                <Card bg="dark" className="shadow p-3 mb-5">
+                  <Card.Img variant="top" src={movie.Poster} />
+                  <Card.Body>
+                    <Card.Title className="text-light" key={movie.title}>
+                      {movie.Title}
+                    </Card.Title>
+                    <Card.Text className="text-light" key={movie.plot}>
+                      {movie.Plot}
+                    </Card.Text>
+                    <Button variant="secondary">Details</Button>
+                  </Card.Body>
+                  <ListGroupItem key={movie.actors}>
+                    Actors: {movie.Actors}
+                  </ListGroupItem>
+                  <ListGroupItem key={movie.directors}>
+                    Directors: {movie.Directors}
+                  </ListGroupItem>
+                  <ListGroupItem key={movie.writer}>
+                    Writers: {movie.Writer}
+                  </ListGroupItem>
+                  <ListGroupItem key={movie.genre}>
+                    Genre: {movie.Genre}
+                  </ListGroupItem>
+                  <ListGroupItem key={movie.rated}>
+                    Rated: {movie.Rated}
+                  </ListGroupItem>
+                </Card>
+              </Col>
+            );
+          })}
+        </Row>
+        <Pagination>
+          <Pagination.First />
+          <Pagination.Prev />
+          <Pagination.Item active>{1}</Pagination.Item>
+          <Pagination.Ellipsis />
 
-          <Carousel.Caption>
-            <h3>Second slide label</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-          </Carousel.Caption>
-        </Carousel.Item>
-        <Carousel.Item>
-          <img
-            className="d-block w-100"
-            src={img1}
-            alt="Third slide"
-          />
+          <Pagination.Item>{10}</Pagination.Item>
+          <Pagination.Item>{11}</Pagination.Item>
+          <Pagination.Item>{12}</Pagination.Item>
+          <Pagination.Item>{13}</Pagination.Item>
+          <Pagination.Item disabled>{14}</Pagination.Item>
 
-          <Carousel.Caption>
-            <h3>Third slide label</h3>
-            <p>
-              Praesent commodo cursus magna, vel scelerisque nisl consectetur.
-            </p>
-          </Carousel.Caption>
-        </Carousel.Item>
-      </Carousel>
-      <Row>
-        <Col>
-          <Card bg="dark">
-            <Card.Img variant="top" src="" />
-            <Card.Body>
-              <Card.Title className="text-light">Movie Title</Card.Title>
-              <Card.Text className="text-light">Movie Description</Card.Text>
-              <Button variant="secondary">Details</Button>
-            </Card.Body>
-          </Card>
-        </Col>
-        <Col>
-          <Card>
-            <Card.Img variant="top" src="" />
-            <Card.Body>
-              <Card.Title>Movie Title</Card.Title>
-              <Card.Text>Movie Description</Card.Text>
-              <Button>Details</Button>
-            </Card.Body>
-          </Card>
-        </Col>
-        <Col>
-          <Card>
-            <Card.Img variant="top" src="" />
-            <Card.Body>
-              <Card.Title>Movie Title</Card.Title>
-              <Card.Text>Movie Description</Card.Text>
-              <Button>Details</Button>
-            </Card.Body>
-          </Card>
-        </Col>
-      </Row>
-      <Row>
-        <Col>
-          <Card>
-            <Card.Img variant="top" src="" />
-            <Card.Body>
-              <Card.Title>Movie Title</Card.Title>
-              <Card.Text>Movie Description</Card.Text>
-              <Button>Details</Button>
-            </Card.Body>
-          </Card>
-        </Col>
-        <Col>
-          <Card>
-            <Card.Img variant="top" src="" />
-            <Card.Body>
-              <Card.Title>Movie Title</Card.Title>
-              <Card.Text>Movie Description</Card.Text>
-              <Button>Details</Button>
-            </Card.Body>
-          </Card>
-        </Col>
-        <Col>
-          <Card>
-            <Card.Img variant="top" src="" />
-            <Card.Body>
-              <Card.Title>Movie Title</Card.Title>
-              <Card.Text>Movie Description</Card.Text>
-              <Button>Details</Button>
-            </Card.Body>
-          </Card>
-        </Col>
-      </Row>
-    </Container>
+          <Pagination.Ellipsis />
+          <Pagination.Item>{20}</Pagination.Item>
+          <Pagination.Next />
+          <Pagination.Last />
+        </Pagination>
+      </Container>
+    </>
   );
 };
 

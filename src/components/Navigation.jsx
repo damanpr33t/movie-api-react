@@ -4,7 +4,7 @@ import { LinkContainer } from 'react-router-bootstrap';
 
 const Navigation = () => {
     return (
-        <Navbar bg="dark" variant="dark" collapseOnSelect expand="md" className="shadow p-3 mb-5">
+        <Navbar bg="dark" variant="dark" collapseOnSelect expand="md" style={{ maxHeight: "100px" }}>
         <Container fluid>
           <LinkContainer to="/">
             <Navbar.Brand className="text-warning">Movie Hub</Navbar.Brand>
@@ -24,7 +24,7 @@ const Navigation = () => {
             <Stack direction="horizontal" gap={3}>
             <FormControl 
               type="search"
-              placeholder="Search"
+              placeholder="Search By Title or imdb-ID"
               className="me-2"
               aria-label="Search"
             />
