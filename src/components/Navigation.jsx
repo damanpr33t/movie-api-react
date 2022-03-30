@@ -2,9 +2,15 @@ import { Button, Container, Form, FormControl, Nav, Navbar, Stack } from 'react-
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { LinkContainer } from 'react-router-bootstrap';
 
-const Navigation = () => {
+const Navigation = ({ inputValue, setInputValue }) => {
+    const handleSubmit = (event) => {
+      let updatedInputValue = setInputValue(inputValue.search)
+      event.preventDefault()
+      return updatedInputValue
+    }
+    
     return (
-        <Navbar bg="dark" variant="dark" collapseOnSelect expand="md" style={{ maxHeight: "100px" }}>
+      <Navbar bg="dark" variant="dark" collapseOnSelect expand="md" style={{ maxHeight: "100px" }}>
         <Container fluid>
           <LinkContainer to="/">
             <Navbar.Brand className="text-warning">Movie Hub</Navbar.Brand>
@@ -20,12 +26,13 @@ const Navigation = () => {
               <Nav.Link>Contact</Nav.Link>
             </LinkContainer>
           </Nav>
-          <Form className="d-flex">
+          <Form className="d-flex" onSubmit={handleSubmit}>
             <Stack direction="horizontal" gap={3}>
             <FormControl 
               type="search"
-              placeholder="Search By Title or imdb-ID"
-              className="me-2"
+              placeholder="Search By Title"
+              className="me-2 search"
+              id="search__input"
               aria-label="Search"
             />
             <Button variant="warning">Search</Button>{' '}
