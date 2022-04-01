@@ -1,18 +1,20 @@
 import { useState } from 'react';
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom'
+import Footer from './components/Footer';
 import Home from './components/Home';
+import Movies from './components/Movies';
 import Navigation from './components/Navigation';
 
 function App() {
-  const [inputValue, setInputValue] = useState('')
-
   return (
     <div className="bg-light">
       <Router>
-      <Navigation inputValue={inputValue} setInputValue={setInputValue} />
+      <Navigation />
         <Routes>
-          <Route path="/" element={<Home inputValue={inputValue} />} />
+          <Route path="/" element={<Home />} />
+          <Route path="/movies" element={<Movies />} />
         </Routes>
+      <Footer />
       </Router>
     </div>
   );
