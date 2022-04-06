@@ -15,11 +15,11 @@ const Footer = () => {
             <LinkContainer to="/">
               <Nav.Link>Home</Nav.Link>
             </LinkContainer>
-            <LinkContainer to="/about">
-              <Nav.Link onClick={handleAlert}>About</Nav.Link>
+            <LinkContainer to="/movies">
+              <Nav.Link>Movies</Nav.Link>
             </LinkContainer>
-            <LinkContainer to="/contact">
-              <Nav.Link onClick={handleAlert}>Contact</Nav.Link>
+            <LinkContainer to="/contact"  onClick={handleAlert} className="cursor-not-allowed">
+              <Nav.Link>Contact</Nav.Link>
             </LinkContainer>
           </Nav>
           <Nav>
