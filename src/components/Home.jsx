@@ -27,7 +27,7 @@ const Home = () => {
     e.preventDefault();
     console.log("button was submitted", inputValue);
     axios
-      .get(`http://www.omdbapi.com/?apikey=6ff3567a&s=${inputValue}`)
+      .get(`http://www.omdbapi.com/?apikey=${MY_SECRET_API_KEY}&s=${inputValue}`)
       .then((res) => {
         console.log(res.data);
         setMovieData(res.data.Search);
