@@ -15,7 +15,7 @@ const Footer = () => {
             <LinkContainer to="/">
               <Nav.Link>Home</Nav.Link>
             </LinkContainer>
-            <LinkContainer to="/movies">
+            <LinkContainer to="#"  onClick={handleAlert} className="cursor-not-allowed">
               <Nav.Link>Movies</Nav.Link>
             </LinkContainer>
             <LinkContainer to="/contact"  onClick={handleAlert} className="cursor-not-allowed">

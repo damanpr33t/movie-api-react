@@ -18,11 +18,6 @@ const Details = () => {
         })
         .catch((err) => {
             console.log(err)
-            return (
-                <>
-                    <img src={SomethingWentWrong} alt=""></img>
-                </>
-            )
         });
     };
     loadMovie();
