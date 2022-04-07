@@ -11,7 +11,7 @@ const Details = () => {
   useEffect(() => {
     const loadMovie = async () => {
       axios
-        .get(`http://www.omdbapi.com/?apikey=6ff3567a&i=${id}`)
+        .get(`http://www.omdbapi.com/?apikey=${MY_SECRET_API_KEY}&i=${id}`)
         .then((res) => {
           console.log(res.data);
           setMovie(res.data);
