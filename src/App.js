@@ -1,9 +1,7 @@
-import { useState } from 'react';
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom'
 import Details from './components/Details';
 import Footer from './components/Footer';
 import Home from './components/Home';
-import Movies from './components/Movies';
 import Navigation from './components/Navigation';
 
 function App() {

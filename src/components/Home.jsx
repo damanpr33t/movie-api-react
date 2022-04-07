@@ -9,7 +9,6 @@ import {
   FormControl,
   Button,
   Row,
-  Spinner,
 } from "react-bootstrap";
 import Movies from "./Movies";
 import undrawSVG from "../assets/undraw_movie_night_re_9umk.svg"
@@ -26,8 +25,9 @@ const Home = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("button was submitted", inputValue);
+    const API_KEY = process.env.REACT_APP_API_KEY;
     axios
-      .get(`http://www.omdbapi.com/?apikey=6ff3567a&s=${inputValue}`)
+      .get(`http://www.omdbapi.com/?apikey=${API_KEY}&s=${inputValue}`)
       .then((res) => {
         console.log(res.data);
         setMovieData(res.data.Search);

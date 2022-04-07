@@ -2,7 +2,6 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { Container } from "react-bootstrap";
 import NoImagePoster from "../assets/no_image_available.jpeg";
-import SomethingWentWrong from "../assets/oops-something-went-wrong.jpg"
 
 const Details = () => {
   const [movie, setMovie] = useState([]);
@@ -10,8 +9,9 @@ const Details = () => {
 
   useEffect(() => {
     const loadMovie = async () => {
+      const API_KEY = process.env.REACT_APP_API_KEY;
       axios
-        .get(`http://www.omdbapi.com/?apikey=6ff3567a&i=${id}`)
+        .get(`http://www.omdbapi.com/?apikey=${API_KEY}&i=${id}`)
         .then((res) => {
           console.log(res.data);
           setMovie(res.data);
