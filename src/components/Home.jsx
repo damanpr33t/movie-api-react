@@ -26,8 +26,7 @@ const Home = () => {
     e.preventDefault();
     console.log("button was submitted", inputValue);
     const API_KEY = process.env.REACT_APP_API_KEY;
-    axios
-      .get(`http://www.omdbapi.com/?apikey=${API_KEY}&s=${inputValue}`)
+    axios.get(`http://www.omdbapi.com/?apikey=${API_KEY}&s=${inputValue}`)
       .then((res) => {
         console.log(res.data);
         setMovieData(res.data.Search);

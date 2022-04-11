@@ -10,8 +10,7 @@ const Details = () => {
   useEffect(() => {
     const loadMovie = async () => {
       const API_KEY = process.env.REACT_APP_API_KEY;
-      axios
-        .get(`http://www.omdbapi.com/?apikey=${API_KEY}&i=${id}`)
+      axios.get(`http://www.omdbapi.com/?apikey=${API_KEY}&i=${id}`)
         .then((res) => {
           console.log(res.data);
           setMovie(res.data);
