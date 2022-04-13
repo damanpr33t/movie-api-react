@@ -9,6 +9,7 @@ import {
   FormControl,
   Button,
   Row,
+  Dropdown,
 } from "react-bootstrap";
 import Movies from "./Movies";
 import undrawSVG from "../assets/undraw_movie_night_re_9umk.svg"
@@ -24,7 +25,7 @@ const Home = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("button was submitted", inputValue);
+    console.log("button was submitted:", inputValue);
     const API_KEY = process.env.REACT_APP_API_KEY;
     axios.get(`https://www.omdbapi.com/?apikey=${API_KEY}&s=${inputValue}`)
       .then((res) => {
@@ -36,6 +37,50 @@ const Home = () => {
         console.log(err);
       });
   };
+
+  function FilterMovies(filter) {
+    console.log(filter)
+    if(filter === "NEWER") {
+      setMovieData(
+        movieData
+        .slice()
+        .sort(
+          (a, b) =>
+          (b.Year - a.Year)
+        )
+      )
+    }
+    if(filter === "OLDER") {
+      setMovieData(
+        movieData
+        .slice()
+        .sort(
+          (a, b) =>
+          (a.Year - b.Year)
+        )
+      )
+    }
+    if(filter === "MOVIE") {
+      setMovieData(
+        movieData
+        .slice()
+        .sort(
+          (type) =>
+          (type.Type === "movie")
+        )
+      )
+    }
+    if(filter === "SERIES") {
+      setMovieData(
+        movieData
+        .slice()
+        .sort(
+          (type) =>
+          (type.Type === "series")
+        )
+      )
+    }
+  }
 
   return (
     <Container fluid style={{ minHeight: "100vh" }}>
@@ -61,12 +106,19 @@ const Home = () => {
       <div style={{ maxWidth: '1200px' }} className="d-flex justify-content-center align-items-center">
         <img className="img-fluid" src={undrawSVG} alt="movie night" />
       </div>
-      <div className="flex">
+      <div className="d-flex justify-content-between my-4">
         <h6>
-          <Badge pill bg="light" text="dark" className="mx-4 my-2">
-            Results: 1 - 10 of {results}
+          <Badge pill bg="light" text="dark">
+            Results: {results ? '1 - 10 of ' + results : 0}
           </Badge>
         </h6>
+        <Form.Select aria-label="Default select" defaultValue="DEFAULT" className="w-50" onChange={(event) => FilterMovies(event.target.value)}>
+          <option value="DEFAULT" disabled>Sort By:</option>
+          <option value="NEWER">Newer</option>
+          <option value="OLDER">Older</option>
+          <option value="MOVIE">Movie</option>
+          <option value="SERIES">Series</option>
+        </Form.Select>
       </div>
       <Row style={{ gridGap: "3rem 0" }} xs={1} sm={2} md={3} lg={4} xl={5}>
         {movieData.slice(0, 10).map((movie, _index) => (
